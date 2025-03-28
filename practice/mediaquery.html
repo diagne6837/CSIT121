@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Responsive Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Mobile Design */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    #wrapper {
+      background-color: 
+#e3c0ff;
+    }
+
+    header {
+      color: 
+#ffffff;
+      background-color: 
+#2f0b55;
+      padding: 1em;
+      text-align: center;
+    }
+
+    main {
+      background-color: 
+#FFFFFF;
+      color: 
+#000000;
+      text-align: center;
+      padding: 1em;
+    }
+
+    aside {
+      background-color:
+#f5eaff;
+      text-align: center;
+      border-top: 1px solid 
+white;
+      padding: 1em;
+    }
+
+    footer {
+      color:
+#ffffff;
+      background-color: 
+#2f0b55;
+      font-size: 70%;
+      text-align: center;
+      padding: 0.5em 0;
+    }
+
+    h2 {
+      color: 
+#2f0b55;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    nav li {
+      border-bottom: 1px solid 
+#2f0b55;
+      text-align: center;
+      padding-top: .5em;
+      padding-bottom: .5em;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:link {
+      color: 
+#2f0b55;
+    }
+
+    nav a:hover {
+      color: 
+#474747;
+    }
+
+    /* Tablet Design Changes */
+    @media (min-width: 600px) {
+      nav ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+      }
+
+      nav ul li {
+        border-bottom: none;
+      }
+
+      header {
+        grid-area: header;
+      }
+
+      nav {
+        grid-area: nav;
+      }
+
+      main {
+        grid-area: main;
+      }
+
+      aside {
+        grid-area: aside;
+      }
+
+      footer {
+        grid-area: footer;
+      }
+
+      #wrapper {
+        display: grid;
+        grid-template:
+          "header header"
+          "nav    nav"
+          "main   aside"
+          "footer footer"
+          / 55%
+      }
+    }
+    /* Desktop Design Changes */
+    @media (min-width: 1024px) {
+      body {
+        background-color: 
+#ececec;
+      }
+
+      nav ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+      }
+
+      #wrapper {
+        width: 80%;
+        margin: auto;
+        max-width: 1200px;
+        display: grid;
+        grid-template:
+          "header header header"
+          "nav    main   aside"
+          "footer footer footer"
+          / 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <h1>Header Content</h1>
+    </header>
+    <nav>
+      <ul>
+        <li id="page">Homepage</li>
+        <li><a href="#">Page Link</a></li>
+        <li><a href="#">Page Link</a></li>
+
+      </ul>
+    </nav>
+    <main>
+      <p>This is main content</p>
+    </main>
+    <aside>
+      <p> This is aside content.</p>
+    </aside>
+    <footer>
+      <p>This is footer content.</p>
+    </footer>
+  </div>
+</body>
+
+</html>
