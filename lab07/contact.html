@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+        <title>Contact Form</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+
+        <ul>
+            <li><a href="tierlist.html">Tier List</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h1>Contact Us</h1>
+
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="feedback">Rate the Feedback</label>
+        <textarea id="feedback" name="feedback"></textarea>
+
+        <label>Which item is the most essential to you?</label>
+        <input type="radio" id="phone" name="favorite" value="Smartphone">
+        <label for="phone">Smartphone</label>
+
+        <input type="radio" id="wifi" name="favorite" value="WI-FI">
+        <label for="wi-fi">wi-fi</label>
+
+        <input type="radio" id="coffee" name="favorite" value="Coffee">
+        <label for="coffee">coffee</label>
+
+        <label for="missing_item">What can be added?</label>
+        <select id="missing_item" name="missing_item">
+            <option value="shower">shower</option>
+            <option value="brushing-teeth">brushing-teeth</option>
+            <option value="waterbottle">waterbottle</option>
+            <option value="laptop">laptop</option>
+            <option value="tea">tea</option>
+        </select>
+
+        <label for="newsletter">Subscribe for updates</label>
+        <input type="checkbox" id="newsletter" name="newsletter">
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+
+</body>
+</html>
