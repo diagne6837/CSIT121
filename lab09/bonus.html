@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Directory (Bonus)</title>
+    <style>
+        table {
+            width: 60%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            display: none; /* hidden by default */
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Employee Directory (Bonus)</h1>
+
+    <button id="toggleButton" onclick="toggleTable()">Get Employee Data</button>
+
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Room</th>
+            </tr>
+        </thead>
+        <tbody id="employeeData">
+            <!-- Data loads here -->
+        </tbody>
+    </table>
+
+    <script>
+        let isTableVisible = false; // keep track of table state
+
+        function toggleTable() {
+            const table = document.getElementById("employeeTable");
+            const button = document.getElementById("toggleButton");
+
+            if (!isTableVisible) {
+                // Show the table and load data
+                loadEmployees();
+                table.style.display = "table";
+                button.textContent = "Close Employee Data";
+                isTableVisible = true;
+            } else {
+                // Hide the table
+                table.style.display = "none";
+                button.textContent = "Get Employee Data";
+                isTableVisible = false;
+            }
+        }
+
+        // This function loads employee data from XML
+        function loadEmployees() {
+            const request = new XMLHttpRequest();
+            request.open("GET", "employee.xml", true);
+
+            request.onreadystatechange = function () {
+                if (request.readyState === 4 && request.status === 200) {
+                    const xml = request.responseXML;
+                    const employees = xml.getElementsByTagName("employee");
+
+                    const tableBody = document.getElementById("employeeData");
+                    tableBody.innerHTML = ""; // clear old data
+
+                    for (let i = 0; i < employees.length; i++) {
+                        const id = employees[i].getAttribute("id");
+                        const name = employees[i].getElementsByTagName("name")[0].textContent;
+                        const room = employees[i].getElementsByTagName("room")[0].textContent;
+
+                        const row = document.createElement("tr");
+                        row.innerHTML = `<td>${id}</td><td>${name}</td><td>${room}</td>`;
+                        tableBody.appendChild(row);
+                    }
+                }
+            };
+
+            request.send();
+        }
+    </script>
+
+</body>
+</html>
