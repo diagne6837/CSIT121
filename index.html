@@ -1,141 +1,96 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Mozilla splash page</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Directory</title>
     <style>
-      /* header and body setup */
+        /* Simple styles to make the table look neat */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
 
-      html {
-        font-family: 'Open Sans', sans-serif;
-        background: url(pattern.png);
-      }
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
 
-      body {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: white;
-        position: relative;
-      }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
 
-      /* Header styling */
+        th {
+            background-color: #f2f2f2;
+        }
 
-      header {
-        height: 150px;
-      }
-
-      header img {
-        width: 100px;
-        position: absolute;
-        right: 32.5px;
-        top: 32.5px;
-      }
-
-      h1 {
-        font-size: 50px;
-        line-height: 140px;
-        margin: 0 0 0 32.5px;
-      }
-
-      /* main section and video styling */
-
-      main {
-        background: #ccc;
-      }
-
-      article {
-        padding: 20px;
-      }
-
-      h2 {
-        margin-top: 0;
-      }
-
-      p {
-        line-height: 2;
-      }
-
-      iframe {
-        float: left;
-        margin: 0 20px 20px 0;
-        max-width: 100%;
-      }
-
-      /* further info links */
-
-      .further-info {
-        clear: left;
-        padding: 40px 0;
-        background: #c13832;
-        box-shadow: inset 0 3px 2px rgba(0,0,0,0.5),
-                    inset 0 -3px 2px rgba(0,0,0,0.5);
-      }
-
-      .further-info a {
-        width: 25%;
-        display: block;
-        float: left;
-      }
-
-      .further-info img {
-        max-width: 100%;
-      }
-
-      .clearfix {
-        clear: both;
-      }
-
-      /* Red panda image */
-
-      .red-panda img {
-        display: block;
-        max-width: 100%;
-      }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
     </style>
-  </head>
-  <body>
-    <header>
-      <h1>Mozilla</h1>
-      <!-- insert <img> element, link to the small
-          version of the Firefox logo -->
+</head>
+<body>
 
-    </header>
+    <h1>Welcome to the Employee Directory</h1>
+    <p>Click the button below to view our awesome team!</p>
 
-    <main>
-      <article>
-        <!-- insert iframe from youtube -->
+    <button onclick="loadEmployeeData()">Get Employee Data</button>
 
-        <h2>Rocking the free web</h2>
+    <table id="employeeTable"></table>
+    
+    <script>
 
-        <p>Mozilla are a global community of technologists, thinkers, and builders, working together to keep the Internet alive and accessible, so people worldwide can be informed contributors and creators of the Web. We believe this act of human collaboration across an open platform is essential to individual growth and our collective future.</p>
 
-        <p>Click on the images below to find more information about the cool stuff Mozilla does. <a href="https://www.flickr.com/photos/mathiasappel/21675551065/">Red panda picture</a> by Mathias Appel.</p>
-      </article>
+    function loadEmployeeData() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "employee.xml", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const xml = xhr.responseXML;
+                const employees = xml.getElementsByTagName("employee");
 
-      <div class="further-info">
-        <!-- insert images with srcsets and sizes -->
-        <a href="https://www.mozilla.org/en-US/firefox/new/">
-          <img>
-        </a>
-        <a href="https://www.mozilla.org/">
-          <img>
-        </a>
-        <a href="https://addons.mozilla.org/">
-          <img>
-        </a>
-        <a href="https://developer.mozilla.org/en-US/">
-          <img>
-        </a>
-        <div class="clearfix"></div>
-      </div>
+                let table=
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Title</th>
+                    <th>Division</th>
+                    <th>Building</th>
+                    <th>Room </th>
+                </tr>
 
-      <div class="red-panda">
-        <!-- insert picture element -->
-      </div>
+                        for (let i = 0; i < employees.length; i++) {
+                        const id = employees[i].getAttribute("id");
+                        const firstname = employees[i].getElementsByTagName("firstname")[0].textContent;
+                        const lastname = employees[i].getElementsByTagName("lastname")[0].textContent;
+                        const title = employees[i].getElementsByTagName("title")[0].textContent;
+                        const division = employees[i].getElementsByTagName("division")[0].textContent;
+                        const building = employees[i].getElementsByTagName("building")[0].textContent;
+                        const room = employees[i].getElementsByTagName("room")[0].textContent;
 
-    </main>
-  </body>
+                        table += `
+                            <tr>
+                                <td>${id}</td>
+                                <td>${firstname}</td>
+                                <td>${lastname}</td>
+                                <td>${title}</td>
+                                <td>${division}</td>
+                                <td>${building}</td>
+                                <td>${room}</td>
+                            </tr>`;
+                    }
+
+                    document.getElementById("employeeTable").innerHTML = table;
+                }
+            };
+            xhr.send();
+        }
+    
+    </script>
+</body>
 </html>
